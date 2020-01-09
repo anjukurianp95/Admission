@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+home
+</title>
+{% load static %}
+<link rel="stylesheet"  href="{% static 'css/style.css'%}">
+</head>
+<body class="bd">
+    <div style="display: inline-flex">
+    
+    <div class="b">
+        <h1>ADMIN</h1>
+        <ul>
+            <li><a href="{% url 'fac_details' %}">HOME</a></li>
+            <li><a href="{% url 'faculty_signup' %}">ADD FACULTY</a></li>
+            <li><a href="{% url 'student_signup'%}">ADD STUDENT</a></li>
+            <li><a href="#">STUDENT DETAILS</a>
+            <div class="submenu">
+                <ul>
+                    <li><a href="{% url 'stud_details' %}">Personal details</a></li>
+                    <li><a href="{% url 'stud_attendance' %}">Attendance</a></li>
+                    <li><a href="{% url 'stud_mark' %}">Mark</a></li>
+                </ul>
+            </div>
+            </li>
+            <li><a href="#">FACULTY DETAILS</a>
+                <div class="submenu">
+                    <ul>
+                        <li><a href="{% url 'fac_details' %}">Personal Details</a></li>
+                        <li><a href="{% url 'fac_attendance' %}">Attendance</a></li>
+                    </ul>
+                </div>    
+            </li>
+            <li><a href="{% url 'timetable' %}">TIME TABLE</a></li>
+            <li><a href="#">LEAVE MANAGEMENT</a>
+                <div class="submenu">
+                    <ul>
+                        <li><a href="{% url 'viewleavefac' %}">Faculty leave</a></li>
+                        <li><a href="{% url 'viewleavestud' %}">Student leave</a></li>
+                    </ul>
+
+                </div>
+            </li>
+            <li><form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                     <input type="submit" value="Logout" name="logout" class="sbm" >
+                </form>
+            </li>
+        </ul>
+    </div>
+    <div class="form">
+        <h1> STUDENT MARKS</h1><br><br>
+        <table style="color:rgb(10, 10, 10)" >
+            <thead>
+                <tr> 
+                    <th>ID</th>
+                    
+                    <th>AssNo</th>
+                    <th>sub 1</th>
+                    <th>sub 2</th>
+                    <th>sub 3</th>
+                    <th>percentage</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% if r %}
+                {% for i in r %}
+                <tr>
+                    <td> {{i.stid_id}}</td>
+                    <td>{{i.assno}}</td>
+                    <td>{{i.sub1}}</td>
+                    <td>{{i.sub2}}</td>
+                    <td>{{i.sub3}}</td>
+                    <td>{{i.percentage}}</td>
+                    
+                </tr>
+                {%endfor %}
+                {%endif %}
+            </tbody>
+        </table>
+        
+    </div>
+    </div>
+</body>
+</html>

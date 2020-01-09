@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+home
+</title>
+{% load static %}
+<link rel="stylesheet"  href="{% static 'css/style.css'%}">
+</head>
+<body class="bd">
+    <div style="display: inline-flex">
+        <div class="b">
+            <h1>FACULTY</h1>
+            <ul>
+                <li><a href="{% url 'faculty_home' %}"> HOME</a></li>
+                <li><a href="{% url 'fac_profile' %}">MY PROFILE</a></li>
+                <li><a href="#">STUDENT DETAILS</a>
+                    <div class="submenu">
+                        <ul>
+                            <li><a href="{% url 'view_stud_details' %}">Personal details</a></li>
+                            <li><a href="">Attendance</a>
+                                <div class="submenu">
+                                    <ul>
+                                        <li><a href="{% url 'jsd2attendance' %}">JSD2</a></li>
+                                        <li><a href="{% url 'jsd2attendance' %}">JSD1</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li><a href="{% url 'view_stud_marks' %}">Mark</a></li>
+                        </ul>
+                     </div>
+                </li>
+                
+                <li><a href="{% url 'view_timetable' %}">TIME TABLE</a></li>
+                <li><a href="{% url 'fac_applyleave' %}">APPLY LEAVE</a></li>
+                <li><form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                         <input type="submit" value="Logout" name="logout" class="sbm" >
+                    </form>
+                </li>
+            </ul>
+        </div>
+        {%if author%}
+            {%for i in author%}
+            
+            <table>
+                <tr><th>id</th></tr>
+                <tr><td>{{i.stid}}</td></tr>
+            </table>
+            {% endfor %}
+            {% endif %}
+
+         </div>
+    </div>
+    
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+home
+</title>
+{% load static %}
+<link rel="stylesheet"  href="{% static 'css/style.css'%}">
+</head>
+<body class="bd">
+<div class="homenav">
+<ul>
+<li><a href="{% url 'index' %}">HOME</a></li>
+<li><a href="{% url 'login' %}">LOGIN</a></li>
+
+</div>
+</body>
+</html>

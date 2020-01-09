@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+home
+</title>
+{% load static %}
+<link rel="stylesheet"  href="{% static 'css/style.css'%}">
+</head>
+<body class="bd">
+    <div style="display: inline-flex">
+        <div class="b">
+            <h1>FACULTY</h1>
+            <ul>
+                <li><a href="{% url 'faculty_home' %}"> HOME</a></li>
+                <li><a href="{% url 'fac_profile' %}">MY PROFILE</a></li>
+                <li><a href="#">STUDENT DETAILS</a>
+                    <div class="submenu">
+                        <ul>
+                            <li><a href="{% url 'view_stud_details' %}">Personal details</a></li>
+                            <li><a href="{% url 'view_stud_attendance' %}">Attendance</a></li>
+                            <li><a href="{% url 'view_stud_marks' %}">Mark</a></li>
+                        </ul>
+                     </div>
+                </li>
+                
+                <li><a href="{% url 'view_timetable' %}">TIME TABLE</a></li>
+                <li><a href="{% url 'fac_applyleave' %}">APPLY LEAVE</a></li>
+                <li><form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                         <input type="submit" value="Logout" name="logout" class="sbm" >
+                    </form>
+                </li>
+            
+        </ul>
+        </div>
+         <div class=form>
+            <h1> APPLY LEAVE</h1>
+            <form action="{% url 'sub' %}" method="post">
+                {% csrf_token %}
+                <input type="text" placeholder="ID" name="fsid" class="inp">
+                <input type="date" placeholder="fromDate" name="fromdate" class="inp">
+                <input type="date" placeholder="todate" name="todate" class="inp">
+                <input type="text" placeholder="reason" name="reason" class="inp">
+                <input type="text" placeholder="status" name="status" class="inp">
+                <input type="submit" placeholder="APPLY" class="sbm" name="sub">
+            </form>
+        </div>
+        <div class="form">
+            <h1> MY LEAVE APPLICATIONS</h1>
+            <table>
+            <thead>
+                <tr> 
+                    <th>ID</th>
+                    <th>from date</th>
+                    <th>to date </th>
+                    <th> reason</th>
+                    <th>status</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% if r %}
+                {%for i in r %}
+                <tr>
+                   <td>{{i.fsid}}</td>
+                    <td>{{i.fromdate}}</td>
+                    <td>{{i.todate}}</td>
+                    <td>{{i.reason}}</td>
+                    <td>{{i.status}}</td>
+                    
+                </tr>
+                {%endfor %}
+                {%endif %} 
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+</body>
+</html>

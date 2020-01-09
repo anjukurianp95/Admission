@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+home
+</title>
+{% load static %}
+<link rel="stylesheet"  href="{% static 'css/style.css'%}">
+</head>
+<body class="bd">
+    <div style="display: inline-flex">
+        <div class="b">
+            <h1>FACULTY</h1>
+            <ul>
+                <li><a href="{% url 'faculty_home' %}"> HOME</a></li>
+                <li><a href="{% url 'fac_profile' %}">MY PROFILE</a></li>
+                <li><a href="#">STUDENT DETAILS</a>
+                    <div class="submenu">
+                        <ul>
+                            <li><a href="{% url 'view_stud_details' %}">Personal details</a></li>
+                            <li><a href="{% url 'view_stud_attendance' %}">Attendance</a></li>
+                            <li><a href="{% url 'view_stud_marks' %}">Mark</a></li>
+                        </ul>
+                     </div>
+                </li>
+                
+                <li><a href="{% url 'view_timetable' %}">TIME TABLE</a></li>
+                <li><a href="{% url 'fac_applyleave' %}">APPLY LEAVE</a></li>
+                <li><form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                         <input type="submit" value="Logout" name="logout" class="sbm" >
+                    </form>
+                </li>
+           
+        </ul>
+        </div>
+        <div>
+            <h1> STUDENT DETAILS</h1><br><br>
+            <table style="color:rgb(163, 39, 163)" >
+                <thead>
+                    <tr> 
+                        <th>ID</th>
+                        <th> Name</th>
+                        <th>Address</th>
+                        <th>AdmNo</th>
+                        <th>AdmDate</th>
+                        <th>DOB</th>
+                        <th>Gender</th>
+                        <th>Guardian</th>
+                        <th>Batch</th>
+                        <th>Mobile</th>
+                        <th>Email</th>
+    
+                    </tr>
+                </thead>
+                <tbody>
+                    {%if authors %}
+                    {%for i in authors %}
+                    <tr>
+                        <td> {{i.stid}}</td>
+                        <td>{{i.name}}</td>
+                        <td>{{i.address}}</td>
+                        <td>{{i.admissionno}}</td>
+                        <td>{{i.admissiondate}}</td>
+                        <td>{{i.dob}}</td>
+                        <td>{{i.gender}}</td>
+                        <td>{{i.guardian}}</td>
+                        <td>{{i.batch}}</td>
+                        <td>{{i.mobile}}</td>
+                        <td>{{i.email}}</td>
+                    </tr>
+                    {%endfor %}
+                    {%endif %}
+                </tbody>
+            </table>
+            
+        </div>
+        </div>
+    
+
+</body>
+</html>

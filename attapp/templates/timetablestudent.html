@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+home
+</title>
+{% load static %}
+<link rel="stylesheet"  href="{% static 'css/style.css'%}">
+</head>
+<body class="bd">
+        <div style="display: inline-flex">
+            <div class="b">
+                <h1>STUDENT</h1>
+                <ul>
+                    <li><a href="{% url 'student_home' %}"> HOME</a></li>
+                    
+                    <li><a href="#">MY PROFILE</a>
+                        <div class="submenu">
+                            <ul>
+                                <li><a href="{% url 'view_student_details' %}">Personal details</a></li>
+                                <li><a href="{% url 'view_student_attendance' %}">Attendance</a></li>
+                                <li><a href="{% url 'view_student_marks' %}">Mark</a></li>
+                            </ul>
+                         </div>
+                    </li>
+                    
+                    <li><a href="{% url 'timetablestudent' %}">TIME TABLE</a></li>
+                    <li><a href="{% url 'student_applyleave' %}">APPLY LEAVE</a></li>
+                
+                    <li><form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                             <input type="submit" value="Logout" name="logout" class="sbm" >
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div >
+                <h1> TIME TABLE</h1><br>
+                <table style="color:rgb(10, 10, 10)" >
+                    <thead>
+                        <tr> 
+                            <th>Day</th>
+                            
+                            <th>Batch</th>
+                            <th>Hour 1</th>
+                            <th>Hour 2</th>
+                            <th>Hour 3</th>
+                            <th>Hour 4</th>
+        
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if rs %}
+                        {% for i in rs %}
+                        <tr>
+                            <td> {{i.day}}</td>
+                            <td>{{i.batch}}</td>
+                            <td>{{i.hour1}}</td>
+                            <td>{{i.hour2}}</td>
+                            <td>{{i.hour3}}</td>
+                            <td>{{i.hour4}}</td>
+                            
+                        </tr>
+                        {%endfor %}
+                        {%endif %}
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+</body>
+</html>

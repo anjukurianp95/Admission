@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+home
+</title>
+{% load static %}
+<link rel="stylesheet"  href="{% static 'css/style.css'%}">
+</head>
+<body class="bd">
+        <div style="display: inline-flex">
+            <div class="b">
+                <h1>STUDENT</h1>
+                <ul>
+                    <li><a href="{% url 'student_home' %}"> HOME</a></li>
+                    
+                    <li><a href="#">MY PROFILE</a>
+                        <div class="submenu">
+                            <ul>
+                                <li><a href="{% url 'view_student_details' %}">Personal details</a></li>
+                                <li><a href="{% url 'view_student_attendance' %}">Attendance</a></li>
+                                <li><a href="{% url 'view_student_marks' %}">Mark</a></li>
+                            </ul>
+                         </div>
+                    </li>
+                    
+                    <li><a href="{% url 'timetablestudent' %}">TIME TABLE</a></li>
+                    <li><a href="{% url 'student_applyleave' %}">APPLY LEAVE</a></li>
+                
+                    <li><form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                             <input type="submit" value="Logout" name="logout" class="sbm" >
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div class=form>
+                <h1> APPLY LEAVE</h1>
+                <form action="{% url 'stuapply' %}" method="post">
+                    {% csrf_token %}
+                    <input type="text" placeholder="ID" name="sid" class="inp">
+                    <input type="date" placeholder="fromDate" name="fromdate" class="inp">
+                    <input type="date" placeholder="todate" name="todate" class="inp">
+                    <input type="text" placeholder="reason" name="reason" class="inp">
+                    <input type="text" placeholder="status" name="status" class="inp">
+                    <input type="submit" placeholder="APPLY" class="sbm" name="stuapply">
+                </form>
+            </div>
+            <div class="form">
+                <h1> MY LEAVE APPLICATIONS</h1>
+                <table>
+                <thead>
+                    <tr> 
+                        <th>ID</th>
+                        <th>from date</th>
+                        <th>to date </th>
+                        <th> reason</th>
+                        <th>status</th>
+    
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if r %}
+                    {%for i in r %}
+                    <tr>
+                       <td>{{i.sid}}</td>
+                        <td>{{i.fromdate}}</td>
+                        <td>{{i.todate}}</td>
+                        <td>{{i.reason}}</td>
+                        <td>{{i.status}}</td>
+                        
+                    </tr>
+                    {%endfor %}
+                    {%endif %} 
+                </tbody>
+            </table>
+        </div>
+        </div>
+</body>
+</html>

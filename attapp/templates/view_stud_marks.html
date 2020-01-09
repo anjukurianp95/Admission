@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+home
+</title>
+{% load static %}
+<link rel="stylesheet"  href="{% static 'css/style.css'%}">
+</head>
+<body class="bd">
+    <div style="display: inline-flex">
+        <div class="b">
+            <h1>FACULTY</h1>
+            <ul>
+                <li><a href="{% url 'faculty_home' %}"> HOME</a></li>
+                <li><a href="{% url 'fac_profile' %}">MY PROFILE</a></li>
+                <li><a href="#">STUDENT DETAILS</a>
+                    <div class="submenu">
+                        <ul>
+                            <li><a href="{% url 'view_stud_details' %}">Personal details</a></li>
+                            <li><a href="{% url 'view_stud_attendance' %}">Attendance</a></li>
+                            <li><a href="{% url 'view_stud_marks' %}">Mark</a></li>
+                        </ul>
+                     </div>
+                </li>
+                
+                <li><a href="{% url 'view_timetable' %}">TIME TABLE</a></li>
+                <li><a href="{% url 'fac_applyleave' %}">APPLY LEAVE</a></li>
+            
+                <li><form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                         <input type="submit" value="Logout" name="logout" class="sbm" >
+                    </form>
+                </li>
+        </ul>
+        </div>
+        <div class="form">
+            <h1> ADD MARKS</h1>
+            <form action="{% url 'submark' %}" method="post">
+                {% csrf_token %}
+                <br><br>
+                <input type="text" placeholder="stid" name="stid" class="inp">
+                <input type="text" placeholder="AssessmentNo" name="assno" class="inp">
+                <input type="text" placeholder="sub1" name="sub1" class="inp">
+                <input type="text" placeholder="sub2" name="sub2" class="inp">
+                <input type="text" placeholder="sub3" name="sub3" class="inp">
+                <input type="text" placeholder="percentage" name="percentage" class="inp"><br><br>
+                <input type="submit" value="add marks" name="submark" class="sbm">
+        
+            </form>
+        </div>
+        <div class="form">
+            <h1> STUDENT MARKS</h1><br><br>
+            <table style="color:rgb(10, 10, 10)" >
+                <thead>
+                    <tr> 
+                        <th>ID</th>
+                        
+                        <th>AssNo</th>
+                        <th>sub 1</th>
+                        <th>sub 2</th>
+                        <th>sub 3</th>
+                        <th>percentage</th>
+    
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if r %}
+                    {% for i in r %}
+                    <tr>
+                        <td> {{i.stid_id}}</td>
+                        <td>{{i.assno}}</td>
+                        <td>{{i.sub1}}</td>
+                        <td>{{i.sub2}}</td>
+                        <td>{{i.sub3}}</td>
+                        <td>{{i.percentage}}</td>
+                        
+                    </tr>
+                    {%endfor %}
+                    {%endif %}
+                </tbody>
+            </table>
+            
+        </div>
+     </div>
+
+    
+
+</body>
+</html>

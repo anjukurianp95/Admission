@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+home
+</title>
+{% load static %}
+<link rel="stylesheet"  href="{% static 'css/style.css'%}">
+</head>
+<body class="bd">
+<div class="b">
+<ul>
+<li><a href="{% url 'index'%}">HOME</a></li>
+<li><a href="{% url 'login'%}">LOGIN</a></li>
+<li><a href="{% url 'signup'%}">SIGN UP</a></li>
+</div>
+<div class="form">
+<form action="{% url 'submit' %}" method="post">
+{% csrf_token %}
+<input type="text" placeholder="name" name="name" class="inp">
+<input type="text" placeholder="email" name="email" class="inp">
+<input type="text" placeholder="mobile" name="mobile" class="inp">
+<input type="text" placeholder="password" name="password" class="inp">
+<input type="submit" placeholder="sign up" class="sbm" name="submit">
+</form>
+</div>
+</body>
+</html>

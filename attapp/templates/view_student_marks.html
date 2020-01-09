@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+home
+</title>
+{% load static %}
+<link rel="stylesheet"  href="{% static 'css/style.css'%}">
+</head>
+<body class="bd">
+        <div style="display: inline-flex">
+            <div class="b">
+                <h1>STUDENT</h1>
+                <ul>
+                    <li><a href="{% url 'student_home' %}"> HOME</a></li>
+                    
+                    <li><a href="#">MY PROFILE</a>
+                        <div class="submenu">
+                            <ul>
+                                <li><a href="{% url 'view_student_details' %}">Personal details</a></li>
+                                <li><a href="{% url 'view_student_attendance' %}">Attendance</a></li>
+                                <li><a href="{% url 'view_student_marks' %}">Mark</a></li>
+                            </ul>
+                         </div>
+                    </li>
+                    
+                    <li><a href="{% url 'timetablestudent' %}">TIME TABLE</a></li>
+                    <li><a href="{% url 'student_applyleave' %}">APPLY LEAVE</a></li>
+                
+                    <li><form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                             <input type="submit" value="Logout" name="logout" class="sbm" >
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div class="form">
+                <h1> MY MARKS</h1><br><br>
+                <table style="color:rgb(10, 10, 10)" >
+                    <thead>
+                        <tr> 
+                            <th>ID</th>
+                            
+                            <th>AssNo</th>
+                            <th>sub 1</th>
+                            <th>sub 2</th>
+                            <th>sub 3</th>
+                            <th>percentage</th>
+        
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if rs %}
+                        {% for i in rs %}
+                        <tr>
+                            <td> {{i.stid_id}}</td>
+                            <td>{{i.assno}}</td>
+                            <td>{{i.sub1}}</td>
+                            <td>{{i.sub2}}</td>
+                            <td>{{i.sub3}}</td>
+                            <td>{{i.percentage}}</td>
+                            
+                        </tr>
+                        {%endfor %}
+                        {%endif %}
+                    </tbody>
+                </table>
+                
+            </div>
+    
+        </div>
+</body>
+</html>

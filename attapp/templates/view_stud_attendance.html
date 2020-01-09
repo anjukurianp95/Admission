@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+home
+</title>
+{% load static %}
+<link rel="stylesheet"  href="{% static 'css/style.css'%}">
+</head>
+<body class="bd">
+    <div style="display: inline-flex">
+        <div class="b">
+            <h1>FACULTY</h1>
+            <ul>
+                <li><a href="{% url 'faculty_home' %}"> HOME</a></li>
+                <li><a href="{% url 'fac_profile' %}">MY PROFILE</a></li>
+                <li><a href="#">STUDENT DETAILS</a>
+                    <div class="submenu">
+                        <ul>
+                            <li><a href="{% url 'view_stud_details' %}">Personal details</a></li>
+                            <li><a href="{% url 'view_stud_attendance' %}">Attendance</a></li>
+                            <li><a href="{% url 'view_stud_marks' %}">Mark</a></li>
+                        </ul>
+                     </div>
+                </li>
+                
+                <li><a href="{% url 'view_timetable' %}">TIME TABLE</a></li>
+                <li><a href="{% url 'fac_applyleave' %}">APPLY LEAVE</a></li>
+            
+                <li><form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                         <input type="submit" value="Logout" name="logout" class="sbm" >
+                    </form>
+                </li>
+        </ul>
+        </div>
+       <div class="form">
+            <h1> ADD ATTENDANCE</h1>
+            <form action="{% url 'addatt' %}" method="post">
+                {% csrf_token %}
+                <br><br>
+                <input type="text" placeholder="stid" name="stid" class="inp">
+                <input type="date" placeholder="Date" name="date" class="inp">
+                <input type="text" placeholder="Hour 1" name="h1" class="inp">
+                <input type="text" placeholder="Hour 2" name="h2" class="inp">
+                <input type="text" placeholder="Hour 3" name="h3" class="inp">
+                <input type="text" placeholder="hour 4" name="h4" class="inp"><br><br>
+                <input type="submit" value="ADD" name="addatt" class="sbm">
+        
+            </form>
+        </div>
+        <div class="form">
+            <h1> STUDENT ATTENDANCE</h1><br><br>
+            <table style="color:rgb(10, 10, 10)" >
+                <thead>
+                    <tr> 
+                        <th>ID</th>
+                        
+                        <th>Date</th>
+                        <th>Hour 1</th>
+                        <th>Hour 2</th>
+                        <th>Hour 3</th>
+                        <th>Hour 4</th>
+    
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if rs %}
+                    {% for i in rs %}
+                    <tr>
+                        <td> {{i.stid}}</td>
+                        <td>{{i.date}}</td>
+                        <td>{{i.status_h1}}</td>
+                        <td>{{i.status_h2}}</td>
+                        <td>{{i.status_h3}}</td>
+                        <td>{{i.status_h4}}</td>
+                        
+                    </tr>
+                    {%endfor %}
+                    {%endif %}
+                </tbody>
+            </table>
+            
+        </div>
+       
+
+    </div>
+</body>
+</html>

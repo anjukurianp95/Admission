@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+home
+</title>
+{% load static %}
+<link rel="stylesheet"  href="{% static 'css/style.css'%}">
+</head>
+<body class="bd">
+        <div style="display: inline-flex">
+            <div class="b">
+                <h1>STUDENT</h1>
+                <ul>
+                    <li><a href="{% url 'student_home' %}"> HOME</a></li>
+                    
+                    <li><a href="#">MY PROFILE</a>
+                        <div class="submenu">
+                            <ul>
+                                <li><a href="{% url 'view_student_details' %}">Personal details</a></li>
+                                <li><a href="{% url 'view_student_attendance' %}">Attendance</a></li>
+                                <li><a href="{% url 'view_student_marks' %}">Mark</a></li>
+                            </ul>
+                         </div>
+                    </li>
+                    
+                    <li><a href="{% url 'timetablestudent' %}">TIME TABLE</a></li>
+                    <li><a href="{% url 'student_applyleave' %}">APPLY LEAVE</a></li>
+                
+                    <li><form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                             <input type="submit" value="Logout" name="logout" class="sbm" >
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+</body>
+</html>
